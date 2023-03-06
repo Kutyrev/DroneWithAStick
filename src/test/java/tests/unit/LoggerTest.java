@@ -29,17 +29,16 @@ class LoggerTest {
 
     @Test
     void endLogging() {
-
-       ReversedLinesFileReader reversedFileReader = null;
-       String expResultOne = "Logging ended";
-       String expResultTwo = "Test";
-       String lastLine = "";
-       String beforeLastLine = "";
+        ReversedLinesFileReader reversedFileReader = null;
+        String expResultOne = "Logging ended";
+        String expResultTwo = "Test";
+        String lastLine = "";
+        String beforeLastLine = "";
 
         logger.endLogging();
 
         try {
-            reversedFileReader = new ReversedLinesFileReader(new File("dws_log.log"),StandardCharsets.UTF_8);
+            reversedFileReader = new ReversedLinesFileReader(new File("dws_log.log"),4096, StandardCharsets.UTF_8);
             lastLine = reversedFileReader.readLine();
             beforeLastLine = reversedFileReader.readLine();
         } catch (IOException e) {
@@ -49,17 +48,11 @@ class LoggerTest {
 
         assertTrue(lastLine.contains(expResultOne));
         assertTrue(beforeLastLine.contains(expResultTwo));
-
     }
 
     @AfterEach
-    void tearDown(){
+    void tearDown() {
         Notificator.removeNotificationObject(logger);
         logger = null;
-
     }
-
-
-
-
-    }
+}

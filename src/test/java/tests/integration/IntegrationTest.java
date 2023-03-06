@@ -8,7 +8,6 @@ import ru.rushydro.cis1c.dkutyrev.dronewithastick.Checks;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 /**
  * DEPENDS OF ENVIRONMENT
  */
@@ -27,18 +26,14 @@ public class IntegrationTest {
 
         @org.junit.jupiter.api.Test
         void pingTest() {
-
             CheckScenario pingCheck = new CheckScenario("ping test", CheckScenario.CheckTypes.Ping, 0);
             pingCheck.setServerName("sr-dc-321");
             CheckStatus pingStatus = Checks.doCheck(pingCheck);
             assertEquals(true, pingStatus.status);
-
-
         }
 
         @org.junit.jupiter.api.Test
         void directoryTest() {
-
             CheckScenario dirCheck = new CheckScenario("directory test", CheckScenario.CheckTypes.DirectoryExists, 0);
             dirCheck.setDirPath("\\\\SR-DC-126.corp.gidroogk.com\\1C_Exchange\\");
             CheckStatus dirStatus = Checks.doCheck(dirCheck);
@@ -47,7 +42,6 @@ public class IntegrationTest {
 
         @org.junit.jupiter.api.Test
         void webServiceTest() {
-
             CheckScenario webServiceCheck = new CheckScenario("web service test", CheckScenario.CheckTypes.UrlConnection, 0);
             webServiceCheck.setURL("http://sr-dc-320.corp.gidroogk.com/TST_DGK_002/ws/ws-cons-exch.1cws?wsdl");
             webServiceCheck.setURLLogin("USER");
@@ -59,7 +53,6 @@ public class IntegrationTest {
 
         @org.junit.jupiter.api.Test
         void comTest() {
-
             CheckScenario comCheck = new CheckScenario("com test", CheckScenario.CheckTypes.ComPlus, 0);
             comCheck.setComClassID("V82.COMConnector");
             comCheck.setComConnMethod("connect");
@@ -70,9 +63,5 @@ public class IntegrationTest {
 
         @AfterEach
         void tearDown(){
-
         }
-
-
-
 }

@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- *
  * @author DKutyrev
  */
 public class Main extends Application {
@@ -15,8 +14,7 @@ public class Main extends Application {
     private Controller controller;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-
+    public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sample.fxml"));
         Parent root = fxmlLoader.load();
         controller = fxmlLoader.getController();
@@ -26,15 +24,12 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
     public static void main(String[] args) {
-
         launch(args);
     }
 
-
     @Override
-    public void stop(){
+    public void stop() {
         System.out.println("Stage is closing");
 
         // Save preferences

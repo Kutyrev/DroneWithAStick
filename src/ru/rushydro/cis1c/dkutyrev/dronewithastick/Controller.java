@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -61,7 +62,6 @@ public class Controller implements Initializable, Notification {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         Notificator.addNotificationObject(this);
 
         logger = new Logger();
@@ -98,7 +98,7 @@ public class Controller implements Initializable, Notification {
 
         ObservableList<String> checkTypesNames = FXCollections.observableArrayList();
 
-        for(CheckScenario.CheckTypes curCheckType:CheckScenario.CheckTypes.values()){
+        for (CheckScenario.CheckTypes curCheckType : CheckScenario.CheckTypes.values()) {
             checkTypesNames.add(curCheckType.CheckTypeName());
         }
 
@@ -200,7 +200,7 @@ public class Controller implements Initializable, Notification {
             selectedCells.setComConnParams(newText);
         });
 
-        dirPath.textProperty().addListener((obs, oldText, newText) ->{
+        dirPath.textProperty().addListener((obs, oldText, newText) -> {
             CheckScenario selectedCells = checkTable.getSelectionModel().getSelectedItem();
             selectedCells.setDirPath(newText);
         });
@@ -212,33 +212,32 @@ public class Controller implements Initializable, Notification {
     }
 
     public void addButtonAction(ActionEvent actionEvent) {
-        data.add(new CheckScenario("",CheckScenario.CheckTypes.UrlConnection,0));
-
-      }
+        data.add(new CheckScenario("", CheckScenario.CheckTypes.UrlConnection, 0));
+    }
 
     public void tableMouseView(MouseEvent mouseEvent) {
         CheckScenario selectedCells = checkTable.getSelectionModel().getSelectedItem();
 
-        if(selectedCells == null) {
+        if (selectedCells == null) {
             blankPane.toFront();
-        }else if(selectedCells.getEnumCheckType() == CheckScenario.CheckTypes.UrlConnection) {
+        } else if (selectedCells.getEnumCheckType() == CheckScenario.CheckTypes.UrlConnection) {
             urlAddress.setText(selectedCells.getURL());
             urlLogin.setText(selectedCells.getURLLogin());
             urlPass.setText(selectedCells.getURLPassword());
             urlTextInclude.setText(selectedCells.getAnswerInclude());
             urlConnectionPane.toFront();
-        }else if(selectedCells.getEnumCheckType() == CheckScenario.CheckTypes.Ping){
+        } else if (selectedCells.getEnumCheckType() == CheckScenario.CheckTypes.Ping) {
             serverName.setText(selectedCells.getServerName());
             pingPane.toFront();
-        }else if(selectedCells.getEnumCheckType() == CheckScenario.CheckTypes.ComPlus){
+        } else if (selectedCells.getEnumCheckType() == CheckScenario.CheckTypes.ComPlus) {
             comClassID.setText(selectedCells.getComClassID());
             comConnMethod.setText(selectedCells.getComConnMethod());
             comConnParams.setText(selectedCells.getComConnParams());
             comPane.toFront();
-        }else if(selectedCells.getEnumCheckType() == CheckScenario.CheckTypes.DirectoryExists){
+        } else if (selectedCells.getEnumCheckType() == CheckScenario.CheckTypes.DirectoryExists) {
             dirPath.setText(selectedCells.getDirPath());
             dirExistsPane.toFront();
-        }else {
+        } else {
             blankPane.toFront();
         }
     }
@@ -255,12 +254,12 @@ public class Controller implements Initializable, Notification {
     }
 
     public void testAll(ActionEvent actionEvent) {
-        data.forEach((curTest)->{
+        data.forEach((curTest) -> {
             CheckStatus curStatus = Checks.doCheck(curTest);
         });
     }
 
-    public void onStageClose(){
+    public void onStageClose() {
         logger.endLogging();
         mainTimer.cancel();
         AppPreferences.SavePreferences(data, mailNotificator);
@@ -269,30 +268,30 @@ public class Controller implements Initializable, Notification {
     public void checkTypeChange(TableColumn.CellEditEvent cellEditEvent) {
         CheckScenario selectedCells = checkTable.getSelectionModel().getSelectedItem();
 
-        if(cellEditEvent.getNewValue() == null) {
+        if (cellEditEvent.getNewValue() == null) {
             blankPane.toFront();
-        }else if(cellEditEvent.getNewValue().equals("Url connection")) {
+        } else if (cellEditEvent.getNewValue().equals("Url connection")) {
             urlAddress.setPromptText(selectedCells.getURL());
             urlLogin.setPromptText(selectedCells.getURLLogin());
             urlPass.setPromptText(selectedCells.getURLPassword());
             urlTextInclude.setPromptText(selectedCells.getAnswerInclude());
             selectedCells.setEnumCheckType(CheckScenario.CheckTypes.UrlConnection);
             urlConnectionPane.toFront();
-        }else if(cellEditEvent.getNewValue().equals("Ping")){
+        } else if (cellEditEvent.getNewValue().equals("Ping")) {
             serverName.setPromptText(selectedCells.getServerName());
             selectedCells.setEnumCheckType(CheckScenario.CheckTypes.Ping);
             pingPane.toFront();
-        }else if(cellEditEvent.getNewValue().equals("Com plus")) {
+        } else if (cellEditEvent.getNewValue().equals("Com plus")) {
             comClassID.setPromptText(selectedCells.getComClassID());
             comConnMethod.setPromptText(selectedCells.getComConnMethod());
             comConnParams.setPromptText(selectedCells.getComConnParams());
             selectedCells.setEnumCheckType(CheckScenario.CheckTypes.ComPlus);
             comPane.toFront();
-        }else if(cellEditEvent.getNewValue().equals("Directory exists")) {
+        } else if (cellEditEvent.getNewValue().equals("Directory exists")) {
             selectedCells.setEnumCheckType(CheckScenario.CheckTypes.DirectoryExists);
             dirPath.setPromptText(selectedCells.getDirPath());
             dirExistsPane.toFront();
-        }else {
+        } else {
             blankPane.toFront();
         }
     }
@@ -310,16 +309,17 @@ public class Controller implements Initializable, Notification {
         public void run() {
             tick++;
 
-            data.forEach((curTest)->{
+            data.forEach((curTest) -> {
 
-                if(curTest.getCheckDelay() != 0 && tick%curTest.getCheckDelay()==0){
+                if (curTest.getCheckDelay() != 0 && tick % curTest.getCheckDelay() == 0) {
                     CheckStatus curStatus = Checks.doCheck(curTest);
-                    if (!curStatus.status) {logArea.appendText(curStatus.errorDesc);}
+                    if (!curStatus.status) {
+                        logArea.appendText(curStatus.errorDesc);
+                    }
                 }
 
             });
 
         }
     }
-
 }

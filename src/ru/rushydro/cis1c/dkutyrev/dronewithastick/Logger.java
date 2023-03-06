@@ -15,7 +15,7 @@ public class Logger implements Notification {
     /**
      * Initiates file writer
      */
-    public Logger(){
+    public Logger() {
         try {
             fw = new FileWriter("dws_log.log", true);
             Notificator.notifyAllObjects("Logging started");
@@ -27,16 +27,17 @@ public class Logger implements Notification {
 
     /**
      * Adds text to log
+     *
      * @param outputText text to log
      */
-    private void writeToLog(String outputText){
+    private void writeToLog(String outputText) {
         // Инициализация объекта date
         Date dateNow = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss a zzz");
         String lastStatus;
 
         try {
-            lastStatus = "["+formatForDateNow.format(dateNow)+"] " + outputText + "\n";
+            lastStatus = "[" + formatForDateNow.format(dateNow) + "] " + outputText + "\n";
             fw.write(lastStatus);
 
         } catch (IOException e) {
@@ -47,9 +48,8 @@ public class Logger implements Notification {
     /**
      * Closes file
      */
-    public void endLogging(){
-
-        if(fw == null){
+    public void endLogging() {
+        if (fw == null) {
             return;
         }
 
@@ -63,8 +63,7 @@ public class Logger implements Notification {
 
     @Override
     public void recieveNotification(String outputText) {
-
-        if(fw == null){
+        if (fw == null) {
             return;
         }
 
@@ -74,6 +73,5 @@ public class Logger implements Notification {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

@@ -13,30 +13,46 @@ public class CheckScenario {
     public String getURL() {
         return url.get();
     }
+
     public SimpleStringProperty serviceSpecURLProperty() {
         return url;
     }
-    public void setURL(String newUrl) {this.url.set(newUrl);}
+
+    public void setURL(String newUrl) {
+        this.url.set(newUrl);
+    }
 
     public String getURLLogin() {
         return login.get();
     }
-    public void setURLLogin(String newUrlLogin) {this.login.set(newUrlLogin);}
+
+    public void setURLLogin(String newUrlLogin) {
+        this.login.set(newUrlLogin);
+    }
 
     public String getURLPassword() {
         return password.get();
     }
-    public void setURLPassword(String newUrlPass) {this.password.set(newUrlPass);}
+
+    public void setURLPassword(String newUrlPass) {
+        this.password.set(newUrlPass);
+    }
 
     public String getAnswerInclude() {
         return answerInclude.get();
     }
-    public void setAnswerInclude(String newAnswerInclude) {this.answerInclude.set(newAnswerInclude);}
+
+    public void setAnswerInclude(String newAnswerInclude) {
+        this.answerInclude.set(newAnswerInclude);
+    }
 
     public String getServerName() {
         return serverName.get();
     }
-    public void setServerName(String serverName) {this.serverName.set(serverName);}
+
+    public void setServerName(String serverName) {
+        this.serverName.set(serverName);
+    }
 
     public String getCheckType() {
         return checkType.get();
@@ -53,6 +69,7 @@ public class CheckScenario {
     public Integer getCheckDelay() {
         return checkDelay.get();
     }
+
     public SimpleIntegerProperty checkDelayProperty() {
         return checkDelay;
     }
@@ -60,6 +77,7 @@ public class CheckScenario {
     public String getCheckDesc() {
         return checkDesc.get();
     }
+
     public SimpleStringProperty checkDescProperty() {
         return checkDesc;
     }
@@ -67,9 +85,11 @@ public class CheckScenario {
     public String getComClassID() {
         return comClassID.get();
     }
+
     public SimpleStringProperty comClassIDProperty() {
         return comClassID;
     }
+
     public void setComClassID(String comClassID) {
         this.comClassID.set(comClassID);
     }
@@ -77,9 +97,11 @@ public class CheckScenario {
     public String getComConnMethod() {
         return comConnMethod.get();
     }
+
     public SimpleStringProperty comConnMethodProperty() {
         return comConnMethod;
     }
+
     public void setComConnMethod(String comConnMethod) {
         this.comConnMethod.set(comConnMethod);
     }
@@ -87,9 +109,11 @@ public class CheckScenario {
     public String getComConnParams() {
         return comConnParams.get();
     }
+
     public SimpleStringProperty comConnParamsProperty() {
         return comConnParams;
     }
+
     public void setComConnParams(String comConnParams) {
         this.comConnParams.set(comConnParams);
     }
@@ -98,9 +122,11 @@ public class CheckScenario {
     public String getCheckLastStatus() {
         return checkLastStatus.get();
     }
+
     public SimpleStringProperty checkLastStatusProperty() {
         return checkLastStatus;
     }
+
     public void setCheckLastStatus(String checkLastStatus) {
         this.checkLastStatus.set(checkLastStatus);
     }
@@ -108,9 +134,11 @@ public class CheckScenario {
     public void setDirPath(String dirPath) {
         this.dirPath.set(dirPath);
     }
+
     public SimpleStringProperty checkDirPathProperty() {
         return dirPath;
     }
+
     public String getDirPath() {
         return dirPath.get();
     }
@@ -122,9 +150,9 @@ public class CheckScenario {
     }
 
     public enum CheckTypes {
-        UrlConnection ("Url connection"),
-        Ping ("Ping"),
-        ComPlus ("Com plus"),
+        UrlConnection("Url connection"),
+        Ping("Ping"),
+        ComPlus("Com plus"),
         DirectoryExists("Directory exists");
 
         private final String name;
@@ -132,12 +160,15 @@ public class CheckScenario {
         CheckTypes(String name) {
             this.name = name;
         }
-        public String CheckTypeName() { return name; }
+
+        public String CheckTypeName() {
+            return name;
+        }
     }
 
     public void setEnumCheckType(CheckTypes enumCheckType) {
         this.enumCheckType = enumCheckType;
-        this.checkType =  new SimpleStringProperty(enumCheckType.CheckTypeName());
+        this.checkType = new SimpleStringProperty(enumCheckType.CheckTypeName());
     }
 
     //General
@@ -180,5 +211,4 @@ public class CheckScenario {
         this.checkLastStatus = new SimpleStringProperty("");
         this.dirPath = new SimpleStringProperty("");
     }
-
 }

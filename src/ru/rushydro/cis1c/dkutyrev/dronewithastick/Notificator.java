@@ -13,12 +13,13 @@ abstract public class Notificator {
 
     /**
      * Adds notification observer (listener)
+     *
      * @param notificationObject Observer (listener).
      *                           Implements Notification interface.
      */
-    public static void addNotificationObject(Notification notificationObject){
+    public static void addNotificationObject(Notification notificationObject) {
 
-        if(notificationObjects == null){
+        if (notificationObjects == null) {
             notificationObjects = new ArrayList<Notification>();
         }
 
@@ -27,21 +28,21 @@ abstract public class Notificator {
 
     /**
      * Removes notification observer (listener)
+     *
      * @param notificationObject Observer (listener).
      *                           Implements Notification interface.
      */
-    public static void removeNotificationObject(Notification notificationObject){
-
+    public static void removeNotificationObject(Notification notificationObject) {
         notificationObjects.remove(notificationObject);
     }
 
     /**
      * Send message to all observers (listeners)
+     *
      * @param outputText Message to send
      */
-    public static void notifyAllObjects(String outputText){
-
-        if(notificationObjects == null){
+    public static void notifyAllObjects(String outputText) {
+        if (notificationObjects == null) {
             return;
         }
 
@@ -50,8 +51,8 @@ abstract public class Notificator {
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss a zzz");
         String lastStatus;
 
-        lastStatus = "["+formatForDateNow.format(dateNow)+"] " + outputText + "\n";
+        lastStatus = "[" + formatForDateNow.format(dateNow) + "] " + outputText + "\n";
 
-        notificationObjects.forEach((curNotifiObject)-> curNotifiObject.recieveNotification(lastStatus));
+        notificationObjects.forEach((curNotifiObject) -> curNotifiObject.recieveNotification(lastStatus));
     }
 }

@@ -7,3 +7,5 @@ Checks:
 * Web/webservice connect check
 * COM+ method call check
 * Network catalog exists check
+
+Stack: Java 8, Java FX

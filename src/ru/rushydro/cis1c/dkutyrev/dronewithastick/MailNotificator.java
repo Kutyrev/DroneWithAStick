@@ -1,7 +1,6 @@
 package ru.rushydro.cis1c.dkutyrev.dronewithastick;
 
 
-
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -28,8 +27,7 @@ public class MailNotificator {
     private SimpleBooleanProperty starttls;
     private SimpleBooleanProperty notify;
 
-    public  MailNotificator(){
-
+    public MailNotificator() {
         host = new SimpleStringProperty();
         port = new SimpleStringProperty();
         username = new SimpleStringProperty();
@@ -38,26 +36,26 @@ public class MailNotificator {
         mailFrom = new SimpleStringProperty();
         subject = new SimpleStringProperty();
         messageText = new SimpleStringProperty();
-        auth =  new SimpleBooleanProperty();
-        starttls  =  new SimpleBooleanProperty();
-        notify  =  new SimpleBooleanProperty();
+        auth = new SimpleBooleanProperty();
+        starttls = new SimpleBooleanProperty();
+        notify = new SimpleBooleanProperty();
 
         this.setAuth(false);
         this.setStarttls(false);
         this.setSubject("");
         this.setMessageText("");
         this.setNotify(false);
-
     }
 
     /**
      * Sets main mail params
-     * @param host SMTP server
-     * @param port Server port
-     * @param mailTo Destination address
+     *
+     * @param host     SMTP server
+     * @param port     Server port
+     * @param mailTo   Destination address
      * @param mailFrom Sender address
      */
-    public void setMainParams(String host, String port, String mailTo, String mailFrom){
+    public void setMainParams(String host, String port, String mailTo, String mailFrom) {
         this.setHost(host);
         this.setPort(port);
         this.setMailTo(mailTo);
@@ -66,11 +64,12 @@ public class MailNotificator {
 
     /**
      * Sets auth mail params
+     *
      * @param username Mail account username
      * @param password Mail account password
      * @param starttls Is TLS required
      */
-    public void setAuthParams(String username, String password, Boolean starttls){
+    public void setAuthParams(String username, String password, Boolean starttls) {
         this.setUsername(username);
         this.setPassword(password);
         this.setAuth(true);
@@ -79,27 +78,28 @@ public class MailNotificator {
 
     /**
      * Sets message subject and text
-     * @param subject Message subject
+     *
+     * @param subject     Message subject
      * @param messageText Messaige text
      */
-    public void setMessageParams(String subject, String messageText){
+    public void setMessageParams(String subject, String messageText) {
         this.setSubject(subject);
         this.setMessageText(messageText);
     }
 
     /**
      * Sends mail
-     * @param checkDesc Current check description
+     *
+     * @param checkDesc      Current check description
      * @param checkSuccessed Is last check was successful
-     * @param addText Current check status description
+     * @param addText        Current check status description
      */
-     public void sendNotification(String checkDesc, Boolean checkSuccessed, String addText){
-
+    public void sendNotification(String checkDesc, Boolean checkSuccessed, String addText) {
         String messageText;
 
         //required fields check
-        if(!notify.get() || getHost().getValue() == null || getPort() == null
-                || getMailFrom() == null || getMailTo() == null){
+        if (!notify.get() || getHost().getValue() == null || getPort() == null
+                || getMailFrom() == null || getMailTo() == null) {
             return;
         }
 
@@ -118,12 +118,11 @@ public class MailNotificator {
 
         if (checkSuccessed) {
             messageText = getMessageText().get() + " RESTORED check, desc: " + checkDesc;
-        }else{
+        } else {
             messageText = getMessageText().get() + " FAILED check, desc: " + checkDesc + ". Error: " + addText;
         }
 
         try {
-
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(getMailFrom().get()));
             message.setRecipients(Message.RecipientType.TO,
@@ -222,7 +221,9 @@ public class MailNotificator {
         this.starttls.set(starttls);
     }
 
-    public BooleanProperty isNotify() {return notify;}
+    public BooleanProperty isNotify() {
+        return notify;
+    }
 
     public void setNotify(boolean notify) {
         this.notify.set(notify);

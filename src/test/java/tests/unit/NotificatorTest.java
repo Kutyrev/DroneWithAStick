@@ -5,12 +5,12 @@ import org.mockito.Mockito;
 import ru.rushydro.cis1c.dkutyrev.dronewithastick.Notification;
 import ru.rushydro.cis1c.dkutyrev.dronewithastick.Notificator;
 
-import static org.mockito.Matchers.argThat;
 import static org.mockito.Matchers.contains;
 
 
 public class NotificatorTest {
 
+    public static final String TEST_STRING_ARGUMENT = "Test";
     private Notification notificationMock = null;
 
     @org.junit.jupiter.api.BeforeAll
@@ -25,8 +25,8 @@ public class NotificatorTest {
     @org.junit.jupiter.api.Test
     void addNotificationObject() {
         Notificator.addNotificationObject(notificationMock);
-        Notificator.notifyAllObjects("Test");
-       // Mockito.verify(notificationMock).recieveNotification(argThat((someString -> someString.contains("Test")))); //TODO
+        Notificator.notifyAllObjects(TEST_STRING_ARGUMENT);
+        Mockito.verify(notificationMock).recieveNotification(contains(TEST_STRING_ARGUMENT));
     }
 
     @AfterEach

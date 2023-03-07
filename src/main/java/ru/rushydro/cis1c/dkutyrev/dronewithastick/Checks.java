@@ -35,6 +35,7 @@ abstract public class Checks {
     public static final String CAN_T_CONNECT_MESSAGE = "Can't connect";
     public static final String DIRECTORY_NOT_FOUND_MESSAGE = "Directory not found";
     public static final String UNKNOWN_CHECK_MESSAGE = "Unknown check";
+
     static private MailNotificator mailNotificator;
 
     /**
@@ -266,7 +267,6 @@ abstract public class Checks {
             String logMessage = path + ARROW_MESSAGE + DIRECTORY_NOT_FOUND_MESSAGE;
             return new CheckStatus(false, logMessage);
         }
-
         return new CheckStatus(true);
     }
 }

@@ -302,7 +302,6 @@ public class Controller implements Initializable, Notification {
     }
 
     class MainTimerTask extends TimerTask {
-
         Integer tick = 0;
 
         @Override
@@ -317,9 +316,7 @@ public class Controller implements Initializable, Notification {
                         logArea.appendText(curStatus.errorDesc);
                     }
                 }
-
             });
-
         }
     }
 }

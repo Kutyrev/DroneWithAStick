@@ -10,6 +10,13 @@ import java.util.Date;
  */
 public class Logger implements Notification {
 
+    public static final String LOG_FILENAME = "dws_log.log";
+    public static final String LOGGING_STARTED_MSG = "Logging started";
+    public static final String DATE_FORMAT_PATTERN = "yyyy.MM.dd hh:mm:ss a zzz";
+    public static final String LOGGING_ENDED_MSG = "Logging ended";
+    public static final String DATE_START_SIGN = "[";
+    public static final String DATE_END_SIGN = "] ";
+
     private static FileWriter fw;
 
     /**
@@ -17,9 +24,9 @@ public class Logger implements Notification {
      */
     public Logger() {
         try {
-            fw = new FileWriter("dws_log.log", true);
-            Notificator.notifyAllObjects("Logging started");
-            writeToLog("Logging started");
+            fw = new FileWriter(LOG_FILENAME, true);
+            Notificator.notifyAllObjects(LOGGING_STARTED_MSG);
+            writeToLog(LOGGING_STARTED_MSG);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -31,13 +38,12 @@ public class Logger implements Notification {
      * @param outputText text to log
      */
     private void writeToLog(String outputText) {
-        // Инициализация объекта date
         Date dateNow = new Date();
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss a zzz");
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat(DATE_FORMAT_PATTERN);
         String lastStatus;
 
         try {
-            lastStatus = "[" + formatForDateNow.format(dateNow) + "] " + outputText + "\n";
+            lastStatus = DATE_START_SIGN + formatForDateNow.format(dateNow) + DATE_END_SIGN + outputText + "\n";
             fw.write(lastStatus);
 
         } catch (IOException e) {
@@ -54,7 +60,7 @@ public class Logger implements Notification {
         }
 
         try {
-            Notificator.notifyAllObjects("Logging ended");
+            Notificator.notifyAllObjects(LOGGING_ENDED_MSG);
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();

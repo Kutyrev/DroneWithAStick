@@ -15,17 +15,25 @@ import java.util.Properties;
  */
 public class MailNotificator {
 
-    private SimpleStringProperty host;
-    private SimpleStringProperty port;
-    private SimpleStringProperty username;
-    private SimpleStringProperty password;
-    private SimpleStringProperty mailTo;
-    private SimpleStringProperty mailFrom;
-    private SimpleStringProperty subject;
-    private SimpleStringProperty messageText;
-    private SimpleBooleanProperty auth;
-    private SimpleBooleanProperty starttls;
-    private SimpleBooleanProperty notify;
+    public static final String RESTORED_CHECK_MSG_PATTERN = " RESTORED check, desc: ";
+    public static final String FAILED_CHECK_MSG_PATTERN = " FAILED check, desc: ";
+    public static final String MAIL_NOTIFICATION_SENT = "Mail notification sent";
+    public static final String MAIL_SMTP_STARTTLS_PROPERTY = "mail.smtp.starttls.enable";
+    public static final String MAIL_SMTP_AUTH_PROPERTY = "mail.smtp.auth";
+    public static final String MAIL_SMTP_HOST_PROPERTY = "mail.smtp.host";
+    public static final String MAIL_SMTP_PORT_PROPERTY = "mail.smtp.port";
+    public static final String ERROR_MES_PATTERN = ". Error: ";
+    private final SimpleStringProperty host;
+    private final SimpleStringProperty port;
+    private final SimpleStringProperty username;
+    private final SimpleStringProperty password;
+    private final SimpleStringProperty mailTo;
+    private final SimpleStringProperty mailFrom;
+    private final SimpleStringProperty subject;
+    private final SimpleStringProperty messageText;
+    private final SimpleBooleanProperty auth;
+    private final SimpleBooleanProperty starttls;
+    private final SimpleBooleanProperty notify;
 
     public MailNotificator() {
         host = new SimpleStringProperty();
@@ -104,10 +112,10 @@ public class MailNotificator {
         }
 
         Properties props = new Properties();
-        props.put("mail.smtp.starttls.enable", String.valueOf(isStarttls().get()));
-        props.put("mail.smtp.auth", String.valueOf(isAuth().get()));
-        props.put("mail.smtp.host", getHost().get());
-        props.put("mail.smtp.port", getPort().get());
+        props.put(MAIL_SMTP_STARTTLS_PROPERTY, String.valueOf(isStarttls().get()));
+        props.put(MAIL_SMTP_AUTH_PROPERTY, String.valueOf(isAuth().get()));
+        props.put(MAIL_SMTP_HOST_PROPERTY, getHost().get());
+        props.put(MAIL_SMTP_PORT_PROPERTY, getPort().get());
 
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
@@ -117,9 +125,9 @@ public class MailNotificator {
                 });
 
         if (checkSuccessed) {
-            messageText = getMessageText().get() + " RESTORED check, desc: " + checkDesc;
+            messageText = getMessageText().get() + RESTORED_CHECK_MSG_PATTERN + checkDesc;
         } else {
-            messageText = getMessageText().get() + " FAILED check, desc: " + checkDesc + ". Error: " + addText;
+            messageText = getMessageText().get() + FAILED_CHECK_MSG_PATTERN + checkDesc + ERROR_MES_PATTERN + addText;
         }
 
         try {
@@ -136,7 +144,7 @@ public class MailNotificator {
             throw new RuntimeException(e);
         }
 
-        Notificator.notifyAllObjects("Mail notification sended");
+        Notificator.notifyAllObjects(MAIL_NOTIFICATION_SENT);
     }
 
     //<editor-fold desc="Getters/Setters">

@@ -10,6 +10,9 @@ import java.util.Date;
 public class CheckStatus {
 
     public static final String DATE_PATTERN = "yyyy.MM.dd hh:mm:ss a zzz";
+    public static final String DATE_START_SIGN = "[";
+    public static final String DATE_END_SIGN = "] ";
+
     public boolean status;
     public String errorDesc;
 
@@ -23,6 +26,6 @@ public class CheckStatus {
         SimpleDateFormat formatForDateNow = new SimpleDateFormat(DATE_PATTERN);
 
         this.status = status;
-        this.errorDesc = "[" + formatForDateNow.format(dateNow) + "] " + errorDesc + "\n";
+        this.errorDesc = DATE_START_SIGN + formatForDateNow.format(dateNow) + DATE_END_SIGN + errorDesc + "\n";
     }
 }

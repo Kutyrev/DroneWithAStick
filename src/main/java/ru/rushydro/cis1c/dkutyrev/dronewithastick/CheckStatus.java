@@ -21,7 +21,6 @@ public class CheckStatus {
     }
 
     public CheckStatus(boolean status, String errorDesc) {
-        // Инициализация объекта date
         Date dateNow = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat(DATE_PATTERN);
 

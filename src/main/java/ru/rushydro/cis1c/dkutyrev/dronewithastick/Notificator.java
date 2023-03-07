@@ -9,6 +9,7 @@ import java.util.Date;
  */
 abstract public class Notificator {
 
+    public static final String DATE_FORMAT_PATTERN = "yyyy.MM.dd hh:mm:ss a zzz";
     private static ArrayList<Notification> notificationObjects;
 
     /**
@@ -48,7 +49,7 @@ abstract public class Notificator {
 
         // Инициализация объекта date
         Date dateNow = new Date();
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss a zzz");
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat(DATE_FORMAT_PATTERN);
         String lastStatus;
 
         lastStatus = "[" + formatForDateNow.format(dateNow) + "] " + outputText + "\n";

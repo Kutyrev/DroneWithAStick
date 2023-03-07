@@ -35,6 +35,8 @@ abstract public class Checks {
     public static final String CAN_T_CONNECT_MESSAGE = "Can't connect";
     public static final String DIRECTORY_NOT_FOUND_MESSAGE = "Directory not found";
     public static final String UNKNOWN_CHECK_MESSAGE = "Unknown check";
+    public static final String CAN_T_CONNECT_EXTENDED_MESSAGE = "Can't connect: ";
+    public static final int TIMEOUT = 10000;
 
     static private MailNotificator mailNotificator;
 
@@ -204,7 +206,7 @@ abstract public class Checks {
         }
 
         InetAddress address = InetAddress.getByName(serverName);
-        if (address.isReachable(10000)) {
+        if (address.isReachable(TIMEOUT)) {
 
             return new CheckStatus(true);
 
@@ -212,7 +214,6 @@ abstract public class Checks {
 
             String logMessage = serverName + ARROW_MESSAGE + HOST_NOT_FOUND_MESSAGE;
             return new CheckStatus(false, logMessage);
-
         }
     }
 
@@ -247,7 +248,7 @@ abstract public class Checks {
             String logMessage = comClassID + ARROW_MESSAGE + CAN_T_CONNECT_MESSAGE;
             return new CheckStatus(false, logMessage);
         } catch (ComFailException e) {
-            String logMessage = comClassID + ARROW_MESSAGE + "Can't connect: " + e.getMessage();
+            String logMessage = comClassID + ARROW_MESSAGE + CAN_T_CONNECT_EXTENDED_MESSAGE + e.getMessage();
             return new CheckStatus(false, logMessage);
         } finally {
             ComThread.Release();

@@ -20,7 +20,7 @@ public class AdvancedEncryptionStandardTest {
         try {
             byte[] encryptedValue =  AdvancedEncryptionStandard.encrypt("314".getBytes(StandardCharsets.UTF_8));
             String expResult = "Ôß¸³Ã\u0003JH\t\u00117û3\u0087Äk";
-            assertEquals(expResult, new String(encryptedValue, "ISO-8859-1"));
+            assertEquals(expResult, new String(encryptedValue, StandardCharsets.ISO_8859_1));
         } catch (Exception e) {
             e.printStackTrace();
             fail("Encryption exception");
@@ -32,7 +32,7 @@ public class AdvancedEncryptionStandardTest {
     void decrypt() {
 
         try {
-            byte[] decryptedValue =  AdvancedEncryptionStandard.decrypt("Ôß¸³Ã\u0003JH\t\u00117û3\u0087Äk".getBytes("ISO-8859-1"));
+            byte[] decryptedValue =  AdvancedEncryptionStandard.decrypt("Ôß¸³Ã\u0003JH\t\u00117û3\u0087Äk".getBytes(StandardCharsets.ISO_8859_1));
             String expResult = "314";
             assertEquals(expResult, new String(decryptedValue));
         } catch (Exception e) {

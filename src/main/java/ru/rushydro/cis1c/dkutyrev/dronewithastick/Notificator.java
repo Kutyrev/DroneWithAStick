@@ -10,6 +10,8 @@ import java.util.Date;
 abstract public class Notificator {
 
     public static final String DATE_FORMAT_PATTERN = "yyyy.MM.dd hh:mm:ss a zzz";
+    public static final String DATE_START_SIGN = "[";
+    public static final String DATE_END_SIGN = "] ";
     private static ArrayList<Notification> notificationObjects;
 
     /**
@@ -52,8 +54,8 @@ abstract public class Notificator {
         SimpleDateFormat formatForDateNow = new SimpleDateFormat(DATE_FORMAT_PATTERN);
         String lastStatus;
 
-        lastStatus = "[" + formatForDateNow.format(dateNow) + "] " + outputText + "\n";
+        lastStatus = DATE_START_SIGN + formatForDateNow.format(dateNow) + DATE_END_SIGN + outputText + "\n";
 
-        notificationObjects.forEach((curNotifiObject) -> curNotifiObject.recieveNotification(lastStatus));
+        notificationObjects.forEach((curNotifyObject) -> curNotifyObject.recieveNotification(lastStatus));
     }
 }

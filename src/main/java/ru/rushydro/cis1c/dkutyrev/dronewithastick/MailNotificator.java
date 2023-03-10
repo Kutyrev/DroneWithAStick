@@ -23,17 +23,17 @@ public class MailNotificator {
     public static final String MAIL_SMTP_HOST_PROPERTY = "mail.smtp.host";
     public static final String MAIL_SMTP_PORT_PROPERTY = "mail.smtp.port";
     public static final String ERROR_MES_PATTERN = ". Error: ";
-    private final SimpleStringProperty host;
-    private final SimpleStringProperty port;
-    private final SimpleStringProperty username;
-    private final SimpleStringProperty password;
-    private final SimpleStringProperty mailTo;
-    private final SimpleStringProperty mailFrom;
-    private final SimpleStringProperty subject;
-    private final SimpleStringProperty messageText;
-    private final SimpleBooleanProperty auth;
-    private final SimpleBooleanProperty starttls;
-    private final SimpleBooleanProperty notify;
+    private SimpleStringProperty host;
+    private SimpleStringProperty port;
+    private SimpleStringProperty username;
+    private SimpleStringProperty password;
+    private SimpleStringProperty mailTo;
+    private SimpleStringProperty mailFrom;
+    private SimpleStringProperty subject;
+    private SimpleStringProperty messageText;
+    private SimpleBooleanProperty auth;
+    private SimpleBooleanProperty starttls;
+    private SimpleBooleanProperty notify;
 
     public MailNotificator() {
         host = new SimpleStringProperty();

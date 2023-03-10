@@ -15,7 +15,7 @@ public class Main extends Application {
     public static final String STAGE_IS_CLOSING_MESSAGE = "Stage is closing";
     public static final int WINDOW_WIDTH = 900;
     public static final int WINDOW_HEIGHT = 550;
-    public static final String FXML_RES_NAME = "sample.fxml";
+    public static final String FXML_RES_NAME = "/sample.fxml";
     private Controller controller;
 
     @Override

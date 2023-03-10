@@ -270,24 +270,24 @@ public class Controller implements Initializable, Notification {
 
         if (cellEditEvent.getNewValue() == null) {
             blankPane.toFront();
-        } else if (cellEditEvent.getNewValue().equals("Url connection")) {
+        } else if (cellEditEvent.getNewValue().equals(CheckScenario.CheckTypes.UrlConnection.name())) {
             urlAddress.setPromptText(selectedCells.getURL());
             urlLogin.setPromptText(selectedCells.getURLLogin());
             urlPass.setPromptText(selectedCells.getURLPassword());
             urlTextInclude.setPromptText(selectedCells.getAnswerInclude());
             selectedCells.setEnumCheckType(CheckScenario.CheckTypes.UrlConnection);
             urlConnectionPane.toFront();
-        } else if (cellEditEvent.getNewValue().equals("Ping")) {
+        } else if (cellEditEvent.getNewValue().equals(CheckScenario.CheckTypes.Ping.name())) {
             serverName.setPromptText(selectedCells.getServerName());
             selectedCells.setEnumCheckType(CheckScenario.CheckTypes.Ping);
             pingPane.toFront();
-        } else if (cellEditEvent.getNewValue().equals("Com plus")) {
+        } else if (cellEditEvent.getNewValue().equals(CheckScenario.CheckTypes.ComPlus.name())) {
             comClassID.setPromptText(selectedCells.getComClassID());
             comConnMethod.setPromptText(selectedCells.getComConnMethod());
             comConnParams.setPromptText(selectedCells.getComConnParams());
             selectedCells.setEnumCheckType(CheckScenario.CheckTypes.ComPlus);
             comPane.toFront();
-        } else if (cellEditEvent.getNewValue().equals("Directory exists")) {
+        } else if (cellEditEvent.getNewValue().equals(CheckScenario.CheckTypes.DirectoryExists.name())) {
             selectedCells.setEnumCheckType(CheckScenario.CheckTypes.DirectoryExists);
             dirPath.setPromptText(selectedCells.getDirPath());
             dirExistsPane.toFront();

@@ -18,7 +18,7 @@ public class NotificatorTest {
     }
 
     @org.junit.jupiter.api.BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         notificationMock = Mockito.mock(Notification.class);
     }
 
@@ -30,7 +30,7 @@ public class NotificatorTest {
     }
 
     @AfterEach
-    void tearDown(){
+    void tearDown() {
         Notificator.removeNotificationObject(notificationMock);
     }
 }
